@@ -11,10 +11,12 @@ urlConvertCurrency =
 
 const fromCurrency = document.getElementById("from-currency");
 // const selectedCurrency = fromCurrency.options[fromCurrency.selectedIndex].text
-const selectedCurrency =
+const selectedFromCurrency =
   fromCurrency.options[fromCurrency.selectedIndex].innerHTML;
 
 const toCurrency = document.getElementById("to-currency");
+const selectedToCurrency =
+  toCurrency.options[toCurrency.selectedIndex].innerHTML;
 // const fromCurrency = document.getElementById("from-currency");
 // const toCurrency = document.getElementById("to-currency");
 
