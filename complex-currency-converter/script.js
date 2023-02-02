@@ -1,13 +1,22 @@
 // Link Country By Currency Code
+// urlCurrencyName =
+//   "https://country-api-jeffrymahbuubi.netlify.app/data/src/country-by-currency-name.json";
 urlCurrencyName =
   "https://country-api-jeffrymahbuubi.netlify.app/data/src/country-by-currency-name.json";
-
 // Link Convert Currency API Free
-urlConvertCurency =
+// urlConvertCurency =
+//   "var requestURL = 'https://api.exchangerate.host/convert?from=USD&to=EUR';";
+urlConvertCurrency =
   "var requestURL = 'https://api.exchangerate.host/convert?from=USD&to=EUR';";
 
 const fromCurrency = document.getElementById("from-currency");
+// const selectedCurrency = fromCurrency.options[fromCurrency.selectedIndex].text
+const selectedCurrency =
+  fromCurrency.options[fromCurrency.selectedIndex].innerHTML;
+
 const toCurrency = document.getElementById("to-currency");
+// const fromCurrency = document.getElementById("from-currency");
+// const toCurrency = document.getElementById("to-currency");
 
 let countriesName = [];
 let countriesCurrency = [];
