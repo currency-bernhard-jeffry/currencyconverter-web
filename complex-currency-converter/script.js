@@ -6,25 +6,25 @@ urlCurrencyName =
 urlConvertCurency =
   "var requestURL = 'https://api.exchangerate.host/convert?from=USD&to=EUR';";
 
-const fromCurrency = document.getElementById("from-currency");
-const toCurrency = document.getElementById("to-currency");
-
-let countriesName = [];
-let countriesCurrency = [];
+const fromCurrency = document.querySelector("#from-currency");
+const toCurrency = document.querySelector("#to-currency");
 
 function showCountryAndCode() {
-  apiCountry.forEach((item) => {
-    countriesName.push(item.country);
-    countriesCurrency.push(item.currency_code);
+  fromCurrency.append(createOptionElement());
+  toCurrency.append(createOptionElement());
+}
+
+function createOptionElement() {
+  fragment = new DocumentFragment();
+
+  apiCountry.forEach((item, index) => {
+    const optionElement = document.createElement("option");
+    optionElement.innerHTML = `${item.country}`;
+    optionElement.setAttribute("value", `${item.currency_code}`);
+    fragment.append(optionElement);
   });
 
-  // Create element option and pass it to "from-country" and "to-country"
-  countriesName.forEach((countryName) => {
-    const optionElement = document.createElement("option");
-    optionElement.innerHTML = countryName;
-    fromCurrency.append(optionElement);
-    toCurrency.append(optionElement);
-  });
+  return fragment;
 }
 
 // The reason we use let instead a constant, because in the beginning we're setting it as
