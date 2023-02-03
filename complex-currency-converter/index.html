@@ -20,26 +20,55 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="converter-container" id="converter-container">
-      <!-- Description -->
-      <div class="description">
-        <h1>Currency Converter</h1>
-        <p>Convert Currency to Another Currency</p>
-      </div>
+    <!-- Description -->
+    <div class="description">
+      <h1>Currency Converter</h1>
+    </div>
+
+    <form action="submit" class="converter-container" id="converter-container">
       <!-- Input -->
       <div class="input-container">
-        <input type="text" id="amount" placeholder="Amount Money" />
+        <input
+          type="text"
+          class="currency-input"
+          id="currency-input"
+          placeholder="Amount Money"
+        />
+
         <label for="from-currency"> From Currency: </label>
-        <select name="from-currency" id="from-currency">
+        <select name="from-currency" class="select-currency" id="from-currency">
           <option value="">--Please choose the country</option>
         </select>
+
         <label for="to-currency"> To Currency: </label>
-        <select name="to-currency" id="to-currency">
+        <select name="to-currency" class="select-currency" id="to-currency">
           <option value="">--Please choose the country</option>
         </select>
+
+        <div class="button-container">
+          <button class="swap-button" id="swap">
+            <i class="fa-solid fa-right-left"></i>
+          </button>
+
+          <button
+            class="convert-button"
+            id="convert"
+            title=""
+            Convert
+            Currency!
+          >
+            Convert
+          </button>
+        </div>
+
+        <!-- Result  -->
+        <div class="result-container" id="result-container">
+          <p id="from-result">1.00 United States Dollar =</p>
+          <p id="to-result">14,854.25 Indonesian Rupiahs</p>
+        </div>
       </div>
-      <ul></ul>
-    </div>
+    </form>
+
     <!-- Script -->
     <script src="script.js"></script>
   </body>
