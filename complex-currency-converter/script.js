@@ -1,20 +1,30 @@
-// Link Country By Currency Code
-urlCurrencyName =
-  "https://country-api-jeffrymahbuubi.netlify.app/data/src/country-by-currency-name.json";
-
-// Link Convert Currency API Free
-urlConvertCurency =
-  "var requestURL = 'https://api.exchangerate.host/convert?from=USD&to=EUR';";
-
 const fromCurrency = document.querySelector("#from-currency");
 const toCurrency = document.querySelector("#to-currency");
+const converterContainer = document.querySelector("#converter-container");
+const currencyInput = document.querySelector("#currency-input");
 
-function showCountryAndCode() {
+function getExchangeRateLinkAPI() {
+  // Populate the select element from-currency and to-currency with Option elements
   fromCurrency.append(createOptionElement());
   toCurrency.append(createOptionElement());
+
+  const fromCurrencyValue = selectElement("from-currency");
+  const toCurrencyValue = selectElement("to-currency");
+
+  const urlConvertAPI = `https://api.exchangerate.host/convert?from=${fromCurrencyValue}&to=${toCurrencyValue}`;
+  return urlConvertAPI;
 }
 
+// Function to select element and return its value
+function selectElement(id) {
+  let element = document.getElementById(id);
+  value = element.value;
+  return value;
+}
+
+// Function to create Option Element
 function createOptionElement() {
+  // DocumentFragment() is like making an empty element that can be use in DOM structure
   fragment = new DocumentFragment();
 
   apiCountry.forEach((item, index) => {
@@ -27,25 +37,15 @@ function createOptionElement() {
   return fragment;
 }
 
-// The reason we use let instead a constant, because in the beginning we're setting it as
-// an empty array, but he're we actually changing the value of it to pass in the quote.
+// apiCountry to save Country name and Currency Code Information
 let apiCountry = [];
 
 // Get Countries Name and Currency Codes Names From API
 async function getCountryInformations() {
   const apiUrl =
     "https://jeffrymahbuubi.github.io/currency-api/data/src/country-by-currency-code.json";
-  try {
-    // const response will not be populated until it has some data fetched from the API
-    // Only setup the const response when we get the data
-    const response = await fetch(apiUrl);
-
-    // apiCurrencies turning the data fetched into a JSON object from a Web Serer
-    apiCountry = await response.json();
-    showCountryAndCode();
-  } catch (error) {
-    console.log(error);
-  }
+  const response = await fetch(apiUrl);
+  apiCountry = await response.json();
 }
 
 getCountryInformations();
