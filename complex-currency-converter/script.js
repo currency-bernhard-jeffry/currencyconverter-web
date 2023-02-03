@@ -12,20 +12,12 @@ function calculateCurrency() {
 }
 
 let rateData = [];
-let currencyDescription = [];
-async function getRateAndCurrencyDescription() {
-  const responseRate = await fetch(getExchangeRateLinkAPI());
-  const responseCurrencyDescription = await fetch(
-    "https://api.exchangerate.host/symbols"
-  );
-
-  rateData = await responseRate.json();
-  currencyDescription = await responseCurrencyDescription.json();
+async function getRate() {
+  const response = await fetch(getExchangeRateLinkAPI());
+  rateData = await response.json();
   calculateCurrency();
 }
 
-let fromCurrencyValue = [];
-let toCurrencyValue = [];
 function getExchangeRateLinkAPI() {
   // Populate the select element from-currency and to-currency with Option elements
   fromCurrency.append(createOptionElement("from"));
@@ -34,8 +26,8 @@ function getExchangeRateLinkAPI() {
   chooseDefaultCurrency(fromCurrency);
   chooseDefaultCurrency(toCurrency);
 
-  fromCurrencyValue = selectElement("from-currency");
-  toCurrencyValue = selectElement("to-currency");
+  const fromCurrencyValue = selectElement("from-currency");
+  const toCurrencyValue = selectElement("to-currency");
 
   const urlConvertAPI = `https://api.exchangerate.host/convert?from=${fromCurrencyValue}&to=${toCurrencyValue}`;
   return urlConvertAPI;
@@ -93,7 +85,7 @@ async function getCountryInformations() {
   const response = await fetch(apiUrl);
   apiCountry = await response.json();
   getExchangeRateLinkAPI();
-  getRateAndCurrencyDescription();
+  getRate();
 }
 
 getCountryInformations();
