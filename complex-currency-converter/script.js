@@ -34,7 +34,7 @@ function createOptionElement() {
     fragment.append(optionElement);
   });
 
-  return fragment;
+  // return fragment;
 }
 
 // apiCountry to save Country name and Currency Code Information
