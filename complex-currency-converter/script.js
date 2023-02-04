@@ -64,7 +64,7 @@ function createOptionElement(className) {
   // DocumentFragment() is like making an empty element that can be use in DOM structure
   fragment = new DocumentFragment();
 
-  apiCountry.forEach((item, index) => {
+  countryAndCurrencyCodeDatas.forEach((item, index) => {
     const optionElement = document.createElement("option");
     optionElement.innerHTML = `${item.country} - ${item.currency_name}`;
     optionElement.setAttribute("value", `${item.currency_code}`);
@@ -83,21 +83,21 @@ function createOptionElement(className) {
 }
 
 // apiCountry to save Country name and Currency Code Information
-let apiCountry = [];
+let countryAndCurrencyCodeDatas = [];
 
 // Get Countries Name and Currency Codes Names From API
-async function getCountryInformations() {
+async function getCountryAndCurrencyCodeDatas() {
   const apiUrl =
     "https://jeffrymahbuubi.github.io/currency-api/data/src/country-by-currency-code.json";
   const response = await fetch(apiUrl);
-  apiCountry = await response.json();
+  countryAndCurrencyCodeDatas = await response.json();
   getExchangeRateLinkAPI();
   getRate();
   calculateCurrency();
 }
 
 function runApp() {
-  getCountryInformations();
+  getCountryAndCurrencyCodeDatas();
   convertButton.addEventListener("click", calculateCurrency);
   converterContainer.addEventListener("submit", (event) => {
     event.preventDefault();
