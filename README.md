@@ -6,6 +6,11 @@ Access it live at <https://currencyconverter-web.netlify.app/>
 
 - XE Currency: <https://www.xe.com/currencyconverter/>
 
+## API Link
+
+- Currency Converter API: <https://api.exchangerate.host/convert?from=USD&to=EUR>
+- Country Currency Information API: <https://jeffrymahbuubi.github.io/currency-api/data/src/country-by-currency-code.json>
+
 ## Team Members
 
 | Name                   | Role             | GitHub URL                                                                                                   |
