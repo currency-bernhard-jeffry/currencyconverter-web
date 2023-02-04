@@ -4,17 +4,24 @@ const converterContainer = document.querySelector("#converter-container");
 const currencyInput = document.querySelector("#currency-input");
 const fromResult = document.querySelector("#from-result");
 const toResult = document.querySelector("#to-result");
+const convertButton = document.querySelector("#convert");
 
 function calculateCurrency() {
   const rate = rateData.result;
   const convertedCurrency = parseInt(currencyInput.value) * rate;
-  console.log(convertedCurrency);
+  fromResult.innerHTML = `${parseInt(currencyInput.value).toPrecision(
+    3
+  )} - ${selectOptionToGetValue("from-currency")}`;
+  toResult.innerHTML = `${convertedCurrency.toFixed(
+    2
+  )} - ${selectOptionToGetValue("to-currency")}`;
 }
 
 let rateData = [];
 async function getRate() {
   const response = await fetch(getExchangeRateLinkAPI());
   rateData = await response.json();
+  getExchangeRateLinkAPI();
   calculateCurrency();
 }
 
@@ -26,8 +33,8 @@ function getExchangeRateLinkAPI() {
   chooseDefaultCurrency(fromCurrency);
   chooseDefaultCurrency(toCurrency);
 
-  const fromCurrencyValue = selectElement("from-currency");
-  const toCurrencyValue = selectElement("to-currency");
+  const fromCurrencyValue = selectOptionToGetValue("from-currency");
+  const toCurrencyValue = selectOptionToGetValue("to-currency");
 
   const urlConvertAPI = `https://api.exchangerate.host/convert?from=${fromCurrencyValue}&to=${toCurrencyValue}`;
   return urlConvertAPI;
@@ -46,7 +53,7 @@ function chooseDefaultCurrency(selectElement) {
 }
 
 // Function to select element and return its value
-function selectElement(id) {
+function selectOptionToGetValue(id) {
   let element = document.getElementById(id);
   value = element.value;
   return value;
@@ -59,7 +66,7 @@ function createOptionElement(className) {
 
   apiCountry.forEach((item, index) => {
     const optionElement = document.createElement("option");
-    optionElement.innerHTML = `${item.country}`;
+    optionElement.innerHTML = `${item.country} - ${item.currency_name}`;
     optionElement.setAttribute("value", `${item.currency_code}`);
 
     // Assign class = from and class = to respectively to fromCurrency and toCurrency element.
@@ -86,6 +93,16 @@ async function getCountryInformations() {
   apiCountry = await response.json();
   getExchangeRateLinkAPI();
   getRate();
+  calculateCurrency();
 }
 
-getCountryInformations();
+function runApp() {
+  getCountryInformations();
+  convertButton.addEventListener("click", calculateCurrency);
+  converterContainer.addEventListener("submit", (event) => {
+    event.preventDefault();
+    calculateCurrency();
+  });
+}
+
+runApp();
