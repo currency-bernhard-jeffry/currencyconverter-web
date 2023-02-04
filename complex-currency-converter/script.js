@@ -6,6 +6,12 @@ const fromResult = document.querySelector("#from-result");
 const toResult = document.querySelector("#to-result");
 const convertButton = document.querySelector("#convert");
 
+// countryAndCurrencyCodeDatas to save Country name, Currency Code, Currency Name fetch from API
+let countryAndCurrencyCodeDatas = [];
+
+// rateData to save rate data fetch from API
+let rateData = [];
+
 function calculateCurrency() {
   const rate = rateData.result;
   const convertedCurrency = parseInt(currencyInput.value) * rate;
@@ -17,7 +23,6 @@ function calculateCurrency() {
   )} - ${selectOptionToGetValue("to-currency")}`;
 }
 
-let rateData = [];
 async function getRate() {
   const response = await fetch(getExchangeRateLinkAPI());
   rateData = await response.json();
@@ -81,9 +86,6 @@ function createOptionElement(className) {
 
   return fragment;
 }
-
-// apiCountry to save Country name and Currency Code Information
-let countryAndCurrencyCodeDatas = [];
 
 // Get Countries Name and Currency Codes Names From API
 async function getCountryAndCurrencyCodeDatas() {
